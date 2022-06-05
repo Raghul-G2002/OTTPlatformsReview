@@ -1,0 +1,261 @@
+#Analysis of OTT Platforms available in the Internet and Giving Complete Review about it
+# Thank You Kaggle and IMDB For providing the datasets
+
+#1... AMAZON PRIME VIDEO
+## AMAZON PRIME VIDEO is one of the Online Streaming Platform available in the Market and it is being continuously used world wide
+
+# Importing Data set 
+
+data1 <- read.csv("D://User 2//Datascience Projects//amazon prime movies.csv")
+
+# Printing the first 10 Rows
+head(data1,n=10)
+
+# Printing the last 10 Rows
+tail(data1,n=10)
+
+# Printing the Summary and quick brief about the Dataset -- AMAZON PRIME VIDEO
+str(data1)
+summary(data1)
+
+#Now we will see the Different Comparisons among the dataset
+library(ggplot2)
+
+#Comparison -1 (Movie Name vs Maturity Rating)
+plot1 <- ggplot(data=head(data1,n=10),aes(x=Movie.Name,y=Maturity.Rating))
+plot1 + geom_point()
+
+
+#Adding Color Mapping to the plot
+plot1 <-ggplot(data=data1,aes(x=Movie.Name,y=Maturity.Rating,color=Language,size=0.5))+xlab("Movie Ratings")+ylab("Movie Name")
+plot1 + geom_point()
+plot1 <-ggplot(data=head(data1,n=30),aes(x=Movie.Name,y=Maturity.Rating,color=Language))+xlab("Movie Name")+ylab("Movie Ratings")
+plot1 + geom_point(size=5)
+plot1 <- ggplot(data=tail(data1,n=30),aes(x=Movie.Name,y=Maturity.Rating,color=Language,size=0.5))+xlab("Movie Name")+ylab("Movie Ratings")
+plot1 + geom_point()
+
+
+#Adding Some Styling for the Plot
+plot1 +geom_point()+ theme(
+  axis.title.x =  element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=1),
+  axis.text.y = element_text(size=20),
+  
+)
+
+#Comparison-2 (Title vs IMDB Ratings)
+plot2 <- ggplot(data=head(data1,n=30),aes(x=Movie.Name,y=IMDb.Rating,color=Language))+xlab("Movie Name")+ylab("IMDb Rating")
+plot2 + geom_point(size=5)
+
+
+#Adding Some Styling
+plot2 + geom_point(size=5)+theme(
+  axis.title.x = element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=1),
+  axis.text.y = element_text(size=20),
+ 
+) + geom_smooth(fill=NA)
+
+#Adding More Geometry to the Dataset
+
+plot2 <- ggplot(data=head(data1,n=30),aes(x=IMDb.Rating,color=Language,fill=Language))
+plot2 + geom_histogram(stat = "count",binwidth = 10,position = "stack",color="Black")
+plot2 + geom_histogram(stat = "count",binwidth = 10,position = "stack",color="Black")+facet_grid(Maturity.Rating ~.)
+
+
+#Comparison 3 (MovieName vs YearOfRelease)
+plot3 <- ggplot(data = head(data1,n=30),aes(x=Movie.Name,y=Year.of.Release,color=Language))+xlab("Movie Name")+ylab("Year of Release")
+plot3 + geom_point(size=5)
+
+#Add some Styling
+plot3 + geom_point(size=5)+theme(
+  axis.title.x = element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=1),
+  axis.text.y = element_text(size=20),
+  
+) + geom_smooth(fill=NA)
+
+
+#Adding more Geometry to the Plot
+plot3 <- ggplot(data = head(data1,n=30),aes(x=Year.of.Release,color=Language))+xlab("Year of Release")
+plot3 + geom_histogram(stat="count",color="Black",aes(fill=Language))
+
+
+#2...DISNEY PLUS HOTSTAR
+# DISNEY PLUS HOTSTAR is one of the OTT Platform which is being supported by Hotstar
+
+data2 <- read.csv("D://User 2//Datascience Projects//disney_plus_shows.csv")
+
+# Printing the first 10 Rows
+head(data2,n=10)
+
+# Printing the last 10 Rows
+tail(data2,n=10)
+
+# Printing the Summary and quick brief about the Dataset -- AMAZON PRIME VIDEO
+str(data2)
+summary(data2)
+
+# Now we will see the different Combinations among the dataset
+library(ggplot2)
+
+# Comparison - 1 (Title vs IMDB Ratings)
+plot1 <- ggplot(data=head(data2,n=30),aes(x=title,y=imdb_rating,color=type))+xlab("Title")+ylab("IMDB Rating")
+plot1 + geom_point(size=5)
+
+
+# Adding some Styling
+plot1 + geom_point(size=5)+theme(
+  axis.title.x = element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=1),
+  axis.text.y = element_text(size=20),
+  
+) + geom_smooth(fill=NA)
+
+# Adding Some Geometry
+plot1 <- ggplot(data=head(data2,n=30),aes(x=imdb_rating,color=type))+xlab("IMDB Rating")
+plot1 + geom_bar()
+ 
+plot1 + geom_histogram(stat="count",aes(fill=type),color="Black")
+
+#Comparison -2 (Title vs IMDB Rating)
+
+plot2 <- ggplot(data=head(data2,n=30),aes(x=imdb_rating,color=genre))+xlab("IMDB Rating")
+plot2 + geom_histogram(stat="count",aes(fill=genre))
+
+# Comparison - 3 (Title vs Awards)
+plot3 <- ggplot(data=head(data2,n=30),aes(x=awards,y=title,color=type))+xlab("Awards")+ylab("Title")
+plot3 + geom_point(size=5)
+
+# Adding some Styling
+plot3 + geom_point(size=5)+theme(
+  axis.title.x = element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=0.2),
+  axis.text.y = element_text(size=10),
+  
+) 
+
+# Adding Some Geometry
+plot3 <- ggplot(data=head(data2,n=30),aes(x=awards,color=awards))+xlab("Awards")
+plot3 + geom_bar()+theme(
+  axis.title.x = element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=0.2),
+  axis.text.y = element_text(size=10),
+  
+) 
+
+
+plot3 + geom_histogram(stat="count",aes(fill=type,color=awards),color="Black")+theme(
+  axis.title.x = element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=0.2),
+  axis.text.y = element_text(size=10),
+  
+) 
+
+
+# Adding Facets
+plot3 <- ggplot(data=head(data2,n=10),aes(x=awards,color=awards))+xlab("Awards")
+plot3 + geom_histogram(stat="count",aes(fill=type,color=awards),color="Black")+theme(
+  axis.title.x = element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=0.2),
+  axis.text.y = element_text(size=10)
+) + facet_grid(imdb_rating~.)
+
+# Comparison- 4 (Title vs IMDB Votes)
+plot4 <- ggplot(data=head(data2,n=30),aes(x=imdb_votes,color=type))+xlab("IMDB Votes")
+plot4 + geom_bar()
+
+#Adding Some Geometry
+
+plot4 + geom_histogram(stat="count",aes(fill=type),color="Black")+theme(
+  axis.title.x = element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=0.2),
+  axis.text.y = element_text(size=10)
+)
+plot4 <- ggplot(data = head(data2,n=30),aes(x=title,y=imdb_votes,color=type))+xlab("Title")+ylab("IMDB Votes")
+plot4  + geom_point(size=5)+theme(
+  axis.title.x = element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=0.2),
+  axis.text.y = element_text(size=10),
+) 
+
+#Comparison -5 (Rated Comparison)
+plot5 <- ggplot(data=head(data2,n=30),aes(x=rated,color=type))
+plot5 + geom_bar()
+
+# Adding some Geometry
+plot5  + geom_bar()+theme(
+  axis.title.x = element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=10),
+  axis.text.y = element_text(size=10),
+) 
+plot5  + geom_histogram(stat="count",color="Black",aes(fill=type))+theme(
+  axis.title.x = element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=10),
+  axis.text.y = element_text(size=10),
+) +xlab("Movie Rated")
+
+#3... NETFLIX 
+# NETFLIX is one of the Online Video Streaming Platform which is used worldwide
+
+data3 <- read.csv("D://User 2//Datascience Projects//netflix_titles.csv")
+
+# Printing the first 10 Rows
+head(data3,n=10)
+
+# Printing the last 10 Rows
+tail(data3,n=10)
+
+# Printing the Summary and quick brief about the Dataset -- AMAZON PRIME VIDEO
+str(data3)
+summary(data3)
+
+# Now we will see the different Combinations among the dataset
+library(ggplot3)
+
+#Comparison -1 (Title vs Rating)
+plot1 <- ggplot(data=head(data3,n=30),aes(x=title,y=rating))
+plot1 + geom_point()
+
+#Adding some Styling and Geometry
+plot1 <- ggplot(data=head(data3,n=30),aes(x=rating))+xlab("Rating")
+plot1 + geom_histogram(stat="count",aes(fill=type))+
+  theme(axis.title.x = element_text(size=20),
+        axis.title.y = element_text(size=20),
+        axis.text.x = element_text(size=15),
+        axis.text.y = element_text(size=25))
+
+#Comparison -2 (Rating vs Type)
+plot2 <- ggplot(data=head(data3,n=30),aes(x=rating,y=type,color=type))
+plot2 + geom_point(size=5)
+
+plot2 <- ggplot(data=head(data3,n=30),aes(x=type))
+plot2 + geom_histogram(stat="count",aes(fill=rating))
+
+# Comparison -3 (Title vs DateAdded)
+
+plot3 <- ggplot(data=head(data3,n=30),aes(x=title,y=date_added,color=type))+xlab("Title")+ylab("Date Added")
+plot3 + geom_point(size=5)+theme(
+  axis.title.x = element_text(size=20),
+  axis.title.y = element_text(size=20),
+  axis.text.x = element_text(size=2),
+  axis.text.y = element_text(size=2)
+)
+
+# Adding some Geometry
+plot3 <- ggplot(data=head(data3,n=30),aes(x=date_added))+xlab("Date Added")
+plot3 + geom_histogram(stat="count",color="Black",aes(fill=type))
+
+
